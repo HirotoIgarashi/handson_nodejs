@@ -1,1 +1,1 @@
-module.exports = {__filename, __dirname}
+module.exports = { __filename, __dirname }
