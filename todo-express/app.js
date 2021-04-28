@@ -19,4 +19,28 @@ app.get('/api/todos', (req, res) => {
   res.json(todos.filter(todo => todo.completed === completed));
 });
 
+// ToDoのIDの値を管理するための変数
+let id = 2;
+
+// ToDoの新規登録
+app.post('/api/todos', (req, res, next) => {
+  const { title } = req.body;
+
+  if (typeof title !== 'string' || !title) {
+    // titleがリクエストに含まれない場合はステータスコード400(Bad Request)
+    const err = new Error('title is required')
+    err.statusCode = 400;
+    return next(err);
+  }
+  // ToDoの作成
+  const todo = { id: id += 1, title, completed: false };
+  todos.push(201).json(todo);
+});
+
+// エラーハンドリングミドルウェア
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.statusCode || 500).json({ error: err.message });
+});
+
 app.listen(3000);
