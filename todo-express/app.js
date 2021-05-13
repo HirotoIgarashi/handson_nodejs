@@ -40,7 +40,7 @@ app.post('/api/todos', (req, res, next) => {
 // エラーハンドリングミドルウェア
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(err.statusCode || 500).json({ error: err.message });
+  res.status(err.statusCode || 500).json({ error: err.message });                                                                                                                       
 });
 
 app.listen(3000);
