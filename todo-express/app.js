@@ -40,7 +40,21 @@ app.post('/api/todos', (req, res, next) => {
 // エラーハンドリングミドルウェア
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(err.statusCode || 500).json({ error: err.message });                                                                                                                       
+  res.status(err.statusCode || 500).json({ error: err.message });
 });
 
 app.listen(3000);
+
+// Next.jsによるルーティングのためこれ以降を追記
+const next = require('next');
+const dev = process.env.NODE_ENV !== 'production';
+const nextApp = next({ dev });
+
+nextApp.prepare().then(
+  // pageディレクトリ内の各Reactコンポーネントに対するサーバーサイドルーティング
+  () => app.get('*', nextApp.getRequestHandler()),
+  err => {
+    console.error(err);
+    process.exit(1);
+  }
+);
