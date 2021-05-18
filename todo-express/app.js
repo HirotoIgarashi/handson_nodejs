@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express');
+
 let todos = [
   { id: 1, title: 'ネーム', completed: false },
   { id: 2, title: '下書き', completed: true }
@@ -34,7 +35,10 @@ app.post('/api/todos', (req, res, next) => {
   }
   // ToDoの作成
   const todo = { id: id += 1, title, completed: false };
-  todos.push(201).json(todo);
+  todos.push(todo);
+
+  // ステータスコード201(Created)で結果を返す
+  todos.status(201).json(todo);
 });
 
 // エラーハンドリングミドルウェア

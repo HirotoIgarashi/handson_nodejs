@@ -8,7 +8,7 @@ import 'isomorphic-fetch'
 const pages = {
   index: { title: 'すべてのTodo', fetchQuery: '' },
   active: { title: '未完了のTodo', fetchQuery: '?completed=false' },
-  completed: { title: '完了したTodo', fetchQuery: '?completed=ture' },
+  completed: { title: '完了したTodo', fetchQuery: '?completed=true' },
 };
 
 // CSRでページを切り替えるためのリンク
@@ -25,7 +25,7 @@ export default function Todos(props) {
   // コンポーネントの状態の初期化と、propsの値に応じた更新
   const [todos, setTodos] = useState([]);
   useEffect(() => {
-    fetch(`/api/todos{fetchQuery}`)
+    fetch(`/api/todos${fetchQuery}`)
       .then(async res => res.ok
         ? setTodos(await res.json())
         : alert(await res.text())
@@ -41,7 +41,7 @@ export default function Todos(props) {
       <h1>{title}</h1>
       {/* Todo一覧の表示 */}
       <ul>
-        {todos.map(({id, title, completed }) =>
+        {todos.map(({ id, title, completed }) =>
           <li key={id}>
             <span style={completed ? { textDecoration: 'line-through' } : {}}>
               {title}
