@@ -1,7 +1,7 @@
 'use strict'
 
 const http = require('http');
-const next = requiire('next');
+const next = require('next');
 const Server = require('socket.io');
 
 let todos = [
@@ -43,7 +43,7 @@ nextApp.prepare().then(
         // ToDoのcompletedの更新
         .on('updateCompleted', (id, completed) => {
           todos = todos.map(todo =>
-            todo.id === id ? { ...todo, completed } : todo;
+            todo.id === id ? { ...todo, completed } : todo
           );
           ioTodos.emit('todos', todos);
         })
