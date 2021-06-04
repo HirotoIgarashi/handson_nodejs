@@ -1,3 +1,70 @@
+// isomorphic-fetchのインストール
+$ npm install isomorphic-fetch
+
+// node --experiimental-repl-await
+require('isomorphic-fetch')
+
+const baseUrl = 'http://localhost:3000/api/todos'
+
+await fetch(baseUrl);
+
+console.log(_.status, await _.json);
+
+// .editor
+for (const title of ['ネーム', '下書き']) {
+  const res = await fetch(baseUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ title })
+  })
+  console.log(res.status, await res.json());
+}
+// .editor
+(await fetch(baseUrl, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: '{}'
+})).status
+
+// ToDo一覧の再取得
+await fetch(baseUrl).then(res => res.json());
+
+// 1件目のToDoをcompletedに
+await fetch(`${baseUrl}/${_[0].id}/completed`, { method: 'PUT' });
+
+console.log(_.status, await _.json);
+
+// 存在しないIDを指定すると404エラー
+(await fetch(`${baseUrl}/foo/completed`, { method: 'PUT' })).status;
+
+// 一覧を取得して確認
+await fetch(baseUrl).then(res => res.json());
+
+// 1件目のToDoをcompletedを解除
+await fetch(`${baseUrl}/${_[0].id}/completed`, { method: 'DELETE' });
+
+console.log(_.status, await _.json);
+
+// 存在しないIDを指定すると404エラー
+(await fetch(`${baseUrl}/foo/completed`, { method: 'DELETE' })).status;
+
+// 一覧を取得して確認
+await fetch(baseUrl).then(res => res.json());
+
+// 1件目のToDoを削除
+(await fetch(`${baseUrl}/${_[0].id}`, { method: 'DELETE' })).status;
+
+// 存在しないIDを指定すると404エラー
+(await fetch(`${baseUrl}/foo`, { method: 'DELETE' })).status;
+
+console.log(_.status, await _.json);
+
+// 確認テスト　ここまで
+
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database(':memory:')
 
@@ -100,4 +167,3 @@ await createTodos([
   { id: '4', title: null, completed: false },
   { id: '5', title: '出稿', completed: false }
 ])
-
