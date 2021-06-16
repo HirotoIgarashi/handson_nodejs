@@ -9,6 +9,9 @@
     "file-system": "node app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "mocha": {
+    "spec": "test/mocha/**/*.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -18,5 +21,12 @@
     "level": "^7.0.0",
     "sqlite3": "^5.0.2",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^9.0.0",
+    "nyc": "^15.1.0",
+    "sinon": "^11.1.1"
   }
 }
