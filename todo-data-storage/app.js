@@ -1,5 +1,4 @@
 'use strict';
-
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 
@@ -16,7 +15,7 @@ app.get('/api/todos', (req, res, next) => {
     return dataStorage.fetchAll().then(todos => res.json(todos), next);
   }
   const completed = req.query.completed === 'true';
-  dataStorage.fetchByCompleted(completed).then(todos = res.json(todos), next);
+  dataStorage.fetchByCompleted(completed).then(todos => res.json(todos), next);
 });
 
 // ToDoの新規登録
