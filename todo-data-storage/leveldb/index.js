@@ -1,4 +1,4 @@
-'use strict';
+'use strict;'
 
 const level = require('level');
 const { join } = require('path');

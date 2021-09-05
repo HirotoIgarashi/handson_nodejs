@@ -1,4 +1,4 @@
-'use stricct';
+'use stricct;'
 
 const { extname } = require('path');
 const { readdir, readFile, writeFile, unlink } = require('fs').promises;
